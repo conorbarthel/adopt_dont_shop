@@ -14,7 +14,6 @@ class Pet < ApplicationRecord
   end
 
   def self.name_has(criteria)
-    #where("name like ?", "%#{criteria}%")
-    select("name").where("name like ?", "%ie%").pluck(:name)
+    select("name").where("name like ?", "%#{criteria}%").pluck(:name)
   end
 end

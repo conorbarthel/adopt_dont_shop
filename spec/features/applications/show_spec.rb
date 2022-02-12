@@ -10,15 +10,28 @@ RSpec.describe 'Application show page' do
                                       description: 'I work from home',
                                       pet_names: 'Rufus',
                                       status:'In Progress')
+    @sadie = Pet.create!(name: "Sadie", age:2)
+    @maggie = Pet.create!(name: "Maggie", age:1)
+    @tucker = Pet.create!(name: "Tucker", age:1)
+
   end
 
   it "should display application's attributes" do
     visit "applications/#{@application.id}"
-  
+
     expect(page).to have_content("Mike")
     expect(page).to have_content("23 Blake st., Denver, CO, 80211")
     expect(page).to have_content("I work from home")
     expect(page).to have_content("Rufus")
     expect(page).to have_content("In Progress")
+  end
+
+  it "should have a search bar that will shows pets that match the search" do
+    visit "applications/#{@application.id}"
+    expect(page).to have_content("Add a Pet to this Application")
+    fill_in("Search Pets by Name", with:"ie")
+
+    expect(page).to have_content("Sadie")
+    expect(page).to have_content("Magie")
   end
 end

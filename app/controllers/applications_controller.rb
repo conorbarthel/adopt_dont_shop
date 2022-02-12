@@ -3,7 +3,7 @@ class ApplicationsController < ApplicationController
   def show
     @application = Application.find(params[:id])
     if params[:search]
-      @results = Pet.name_has(params[:search])
+      @results = Pet.search(params[:search])
     else
       @results = []
     end
@@ -20,6 +20,10 @@ class ApplicationsController < ApplicationController
     else
       redirect_to "/applications/#{new_application.id}"
     end
+  end
+
+  def update
+    
   end
 
   private

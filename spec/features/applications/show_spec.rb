@@ -10,9 +10,10 @@ RSpec.describe 'Application show page' do
                                       description: 'I work from home',
                                       pet_names: 'Rufus',
                                       status:'In Progress')
-    @sadie = Pet.create!(name: "Sadie", age:2)
-    @maggie = Pet.create!(name: "Maggie", age:1)
-    @tucker = Pet.create!(name: "Tucker", age:1)
+    @spca = Shelter.create!(name: "SPCA", rank:2, city: "Santa Cruz")
+    @sadie = @spca.pets.create!(name: "Sadie", age:2)
+    @maggie = @spca.pets.create!(name: "Maggie", age:1)
+    @tucker = @spca.pets.create!(name: "Tucker", age:1)
 
   end
 
@@ -30,8 +31,9 @@ RSpec.describe 'Application show page' do
     visit "applications/#{@application.id}"
     expect(page).to have_content("Add a Pet to this Application")
     fill_in("Search Pets by Name", with:"ie")
-
+    click_on "Search"
+    save_and_open_page
     expect(page).to have_content("Sadie")
-    expect(page).to have_content("Magie")
+    expect(page).to have_content("Maggie")
   end
 end

@@ -12,4 +12,9 @@ class Pet < ApplicationRecord
   def self.adoptable
     where(adoptable: true)
   end
+
+  def self.name_has(criteria)
+    #where("name like ?", "%#{criteria}%")
+    select("name").where("name like ?", "%ie%").pluck(:name)
+  end
 end

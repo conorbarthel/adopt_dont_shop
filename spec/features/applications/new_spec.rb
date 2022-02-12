@@ -12,7 +12,18 @@ RSpec.describe 'the applications new page' do
     fill_in("Zipcode", with:"80212")
     fill_in("Why you would be a good owner", with:"I just would")
     click_on 'Submit'
-    save_and_open_page
+
     expect(page).to have_content("Caitlin")
+  end
+
+  it "displays an error message when all fields are not filled" do
+    visit '/applications/new'
+    fill_in("Name", with:"Caitlin")
+    fill_in("Street address", with:"4562 Alcott St")
+    fill_in("City", with:"Denver")
+    click_on 'Submit'
+    #save_and_open_page
+
+    expect(page).to have_content("All fields must be filled in")
   end
 end

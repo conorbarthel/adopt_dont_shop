@@ -8,12 +8,23 @@
 <% end %>
 <p>Application Status: <%= @application.status %></p>
 
-<p>"Add a Pet to this Application"</p>
-<%= form_with url: "/applications/#{@application.id}?search=input", method: :get, local: true do |form| %>
-  <%= form.label :search, "Search Pets by Name" %>
-  <%= form.text_field :search %>
-  <%= form.submit "Search" %>
-<% end %>
-<% @results.each do |result| %>
-  <%= result.name %> <%= button_to "Adopt this Pet", "/applications/#{@application.id}", method: :post, params:{pet_id: "#{result.id}"} %></br>
+<% if @application.status != "Pending" %>
+  <div id="add_pets">
+  <p>Add a Pet to this Application</p>
+  <%= form_with url: "/applications/#{@application.id}?search=input", method: :get, local: true do |form| %>
+    <%= form.label :search, "Search Pets by Name" %>
+    <%= form.text_field :search %>
+    <%= form.submit "Search" %>
+  <% end %>
+  <% @results.each do |result| %>
+    <%= result.name %> <%= button_to "Adopt this Pet", "/applications/#{@application.id}", method: :post, params:{pet_id: "#{result.id}"} %></br>
+  <% end %>
+  <% if @application.pets != [] %>
+    <%= form_with url: "/applications/#{@application.id}?reason=input", method: :get, local: true do |form| %>
+      <%= form.label :reason, "Why I would make a good owner" %>
+      <%= form.text_field :reason %>
+      <%= form.submit "Submit Application" %>
+    <% end %>
+  <% end %>
+  </div>
 <% end %>

@@ -28,7 +28,7 @@ RSpec.describe 'Application show page' do
   it "should have a search bar that will shows pets that match the search" do
     visit "applications/#{@application.id}"
     expect(page).to have_content("Add a Pet to this Application")
-    fill_in("Search Pets by Name", with:"ie")
+    fill_in("Search Pets by Name", with:"Ie")
     click_on "Search"
     #save_and_open_page
     expect(page).to have_content("Sadie")
@@ -52,7 +52,7 @@ RSpec.describe 'Application show page' do
     fill_in("Search Pets by Name", with:"Sadie")
     click_on "Search"
     click_on "Adopt this Pet"
-    save_and_open_page
+    #save_and_open_page
     fill_in("Why I would make a good owner", with:"I just would")
     click_on "Submit Application"
     expect(current_path).to eq("/applications/#{@application.id}")

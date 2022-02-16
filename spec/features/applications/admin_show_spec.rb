@@ -55,33 +55,35 @@ RSpec.describe 'the admin applications show' do
 
   it "next to the approved pet is an indicator that they have been approved" do
     visit "/admin/applications/#{@application.id}"
-    save_and_open_page
+    #save_and_open_page
     click_on "Approve Mr. Pirate Application"
 
     expect(page).to have_content("#{@pirate.name} Approved")
     expect(page).to_not have_content("Approve #{@pirate.name} Application")
   end
 
-  xit "approving or rejecting a pet on one application doesn't change the other" do
+  it "approving or rejecting a pet on one application doesn't change the other" do
     visit "/admin/applications/#{@application.id}"
     click_on "Approve Clawdia"
     visit "/admin/applications/#{@application_2.id}"
     click_on "Approve Clawdia"
   end
 
-  xit "application is approved if all pets on the application are approved" do
+  it "application is approved if all pets on the application are approved" do
     visit "/admin/applications/#{@application.id}"
     click_on "Approve Mr. Pirate Application"
     click_on "Approve Clawdia Application"
+    save_and_open_page
     within '#header' do
       expect(page).to have_content("Approved")
     end
   end
 
-  xit "application is rejected if any pet on the application is rejected" do
+  it "application is rejected if any pet on the application is rejected" do
     visit "/admin/applications/#{@application.id}"
     click_on "Approve Mr. Pirate Application"
     click_on "Reject Clawdia Application"
+    save_and_open_page
     within '#header' do
       expect(page).to have_content("Rejected")
     end

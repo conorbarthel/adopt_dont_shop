@@ -17,17 +17,25 @@ class ApplicationsController < ApplicationController
   def admin_show
     @application = Application.find(params[:id])
     @pet_applications = @application.pet_applications
-    # @pet_application = PetApplication.find_by(application_id: @application.id, pet_id: pet.id)
-    # if @pet_application.status == nil
-    #   @pet_application.update(status: "Pending")
-    # end
+    @done = @pet_applications.find_by(status: nil)
+    @approve = @pet_applications.find_by(status: nil)
+    @reject = @pet_applications.find_by(status: "Rejected")
   end
 
   def update
     pet = Pet.find(params[:pet_id])
     application = Application.find(params[:id])
+    pet_applications = application.pet_applications
     @pet_application = PetApplication.find_by(pet_id: pet.id, application_id: application.id)
     @pet_application.update(status: params[:status])
+    done = pet_applications.find_by(status: nil)
+    approve = pet_applications.find_by(status: nil)
+    reject = pet_applications.find_by(status: "Rejected")
+    if done == nil
+      application.update(status: "Approved")
+    else
+      application.update(status: "Rejected")
+    end
     redirect_to("/admin/applications/#{application.id}")
   end
 

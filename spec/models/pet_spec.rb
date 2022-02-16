@@ -35,7 +35,7 @@ RSpec.describe Pet, type: :model do
 
     describe '#name_with_id' do
       it "finds the pet name from id" do
-        expect(Pet.name_with_id(@pet_1.id))
+        expect(Pet.pet_with_id(@pet_1.id))
       end
     end
   end

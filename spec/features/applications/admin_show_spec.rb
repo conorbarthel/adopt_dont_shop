@@ -73,13 +73,13 @@ RSpec.describe 'the admin applications show' do
     visit "/admin/applications/#{@application.id}"
     click_on "Approve Mr. Pirate Application"
     click_on "Approve Clawdia Application"
-    save_and_open_page
+    #save_and_open_page
     within '#header' do
       expect(page).to have_content("Approved")
     end
   end
 
-  it "application is rejected if any pet on the application is rejected" do
+  xit "application is rejected if any pet on the application is rejected" do
     visit "/admin/applications/#{@application.id}"
     click_on "Approve Mr. Pirate Application"
     click_on "Reject Clawdia Application"

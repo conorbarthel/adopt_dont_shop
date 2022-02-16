@@ -20,21 +20,10 @@ RSpec.describe 'the admin shelters index' do
     @pet_application = PetApplication.create(application_id: @application.id, pet_id: @shelter_1.pets.first.id)
   end
 
-  it 'lists all the shelter names' do
-    visit "/admin/shelters"
+  it "shows shelters name and city" do
+    visit "/admin/shelters/#{@shelter_1.id}"
 
-    expect(@shelter_2.name).to appear_before(@shelter_3.name)
-    expect(@shelter_3.name).to appear_before(@shelter_1.name)
-  end
-
-  it "has a section that lists Pending Applications" do
-    visit "/admin/shelters"
-
-    within '#pending' do
-      expect(page).to have_content("Shelter's with Pending Applications")
-      expect(page).to have_content("#{@shelter_1.name}")
-      expect(page).to_not have_content("#{@shelter_2.name}")
-      expect(page).to_not have_content("#{@shelter_3.name}")
-    end
+    expect(page).to have_content(@shelter_1.name)
+    expect(page).to have_content(@shelter_1.city)
   end
 end

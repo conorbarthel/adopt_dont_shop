@@ -11,6 +11,11 @@ class SheltersController < ApplicationController
 
   def admin_index
     @shelters = Shelter.order_by_shelter_name
+    @pending = Shelter.find_pending_applications
+  end
+
+  def admin_show
+    @shelter = Shelter.find(params[:id])
   end
 
   def pets

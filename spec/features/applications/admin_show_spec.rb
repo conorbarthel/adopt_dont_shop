@@ -106,7 +106,7 @@ RSpec.describe 'the admin applications show' do
     click_on "Approve Mr. Pirate Application"
     click_on "Approve Clawdia Application"
     visit "/admin/applications/#{@application_2.id}"
-    save_and_open_page
+  
     expect(page).to have_content(@claw.name)
     expect(page).to_not have_content( "Approve Clawdia Application")
   end

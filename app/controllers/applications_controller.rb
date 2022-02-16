@@ -29,11 +29,11 @@ class ApplicationsController < ApplicationController
     @pet_application = PetApplication.find_by(pet_id: pet.id, application_id: application.id)
     @pet_application.update(status: params[:status])
     done = pet_applications.find_by(status: nil)
-    approve = pet_applications.find_by(status: nil)
-    reject = pet_applications.find_by(status: "Rejected")
-    if done == nil
+    reject = pet_applications.find_by(status: "Reject")
+    if done == nil && reject == nil
       application.update(status: "Approved")
-    else
+      application.update_pets_status
+    elsif done == nil
       application.update(status: "Rejected")
     end
     redirect_to("/admin/applications/#{application.id}")

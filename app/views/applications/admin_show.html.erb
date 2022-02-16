@@ -5,13 +5,12 @@
 <% if @done != nil %>
   <% @pet_applications.each do |pet_application| %>
     <%= Pet.pet_with_id(pet_application.pet_id).name %>
-    <%= return "This pet has been approved for adoption" if Pet.pet_with_id(pet_application.pet_id).adoptable == false %>
+    <%= return "#{Pet.pet_with_id(pet_application.pet_id).name} has been approved for adoption" if Pet.pet_with_id(pet_application.pet_id).adoptable == false %>
     <% if pet_application.status == nil %>
       <%= button_to "Approve #{Pet.pet_with_id(pet_application.pet_id).name} Application",
       "/applications/#{@application.id}", method: :patch, params: {pet_id: pet_application.pet_id, status: "Approve"} %>
       <%= button_to "Reject #{Pet.pet_with_id(pet_application.pet_id).name} Application",
-      "/applications/#{@application.id}", method: :patch, params: {pet_id: pet_application.pet_id, status: "Reject"},
-      method: :get %>
+      "/applications/#{@application.id}", method: :patch, params: {pet_id: pet_application.pet_id, status: "Reject"} %>
     <% elsif pet_application.status == "Approve" %>
       <%= "#{Pet.pet_with_id(pet_application.pet_id).name} Approved" %>
     <% elsif pet_application.status == "Reject" %>

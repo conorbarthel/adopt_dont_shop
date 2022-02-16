@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'the admin applications show' do
   before(:each) do
+    PetApplication.destroy_all
     Pet.destroy_all
     Shelter.destroy_all
     Application.destroy_all
@@ -79,22 +80,35 @@ RSpec.describe 'the admin applications show' do
     end
   end
 
-  xit "application is rejected if any pet on the application is rejected" do
+  it "application is rejected if any pet on the application is rejected" do
     visit "/admin/applications/#{@application.id}"
     click_on "Approve Mr. Pirate Application"
+    expect(current_path).to eq("/admin/applications/#{@application.id}")
     click_on "Reject Clawdia Application"
-    save_and_open_page
+    expect(current_path).to eq("/admin/applications/#{@application.id}")
+    #save_and_open_page
     within '#header' do
       expect(page).to have_content("Rejected")
     end
   end
 
-  xit "If application is approved pets are no longer adoptable" do
+  it "If application is approved pets are no longer adoptable" do
     visit "/admin/applications/#{@application.id}"
     click_on "Approve Mr. Pirate Application"
     click_on "Approve Clawdia Application"
-    visit "/pets/#{@claw.name}"
+    visit "/pets/#{@claw.id}"
+    #save_and_open_page
     expect(page).to have_content("false")
     expect(page).to_not have_content("true")
+  end
+
+  it "does not have buttons to approve or reject adopted pets on other applications" do
+    visit "/admin/applications/#{@application.id}"
+    click_on "Approve Mr. Pirate Application"
+    click_on "Approve Clawdia Application"
+    visit "/admin/applications/#{@application_2.id}"
+
+    expect(page).to have_content(@claw.name)
+    expect(page).to_not have_content( "Approve Clawdia Application")
   end
 end

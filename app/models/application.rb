@@ -8,7 +8,7 @@ class Application < ApplicationRecord
   has_many :pet_applications
   has_many :pets, through: :pet_applications
 
-  def self.find_pending_apps
-    where("status = 'Pending'")
+  def self.find_pet_apps_with_id(app_id)
+    joins(:pet_applications).where("application_id = #{app_id}")
   end
 end

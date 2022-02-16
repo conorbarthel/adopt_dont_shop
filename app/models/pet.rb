@@ -16,4 +16,8 @@ class Pet < ApplicationRecord
   def self.name_has(criteria)
     where("name like ?", "%#{criteria}%")
   end
+
+  def self.pet_with_id(id)
+    find_by(id: id)
+  end
 end

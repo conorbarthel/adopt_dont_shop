@@ -41,7 +41,7 @@ RSpec.describe 'Application show page' do
     fill_in("Search Pets by Name", with:"Sadie")
     click_on "Search"
     click_on "Adopt this Pet"
-    #save_and_open_page
+
     expect(current_path).to eq("/applications/#{@application.id}")
     expect(page).to have_content("Sadie")
     expect(page).to_not have_content("Adopt this Pet")
@@ -53,7 +53,6 @@ RSpec.describe 'Application show page' do
     fill_in("Search Pets by Name", with:"Sadie")
     click_on "Search"
     click_on "Adopt this Pet"
-    #save_and_open_page
     fill_in("Why I would make a good owner", with:"I just would")
     click_on "Submit Application"
     expect(current_path).to eq("/applications/#{@application.id}")

@@ -12,7 +12,7 @@ RSpec.describe 'the applications new page' do
     fill_in("Zipcode", with:"80212")
     fill_in("Why you would be a good owner", with:"I just would")
     click_on 'Submit'
-    save_and_open_page
+    
     expect(page).to have_content("Caitlin")
     expect(page).to have_content("In Progress")
   end

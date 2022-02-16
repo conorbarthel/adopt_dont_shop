@@ -51,9 +51,9 @@ RSpec.describe Shelter, type: :model do
       end
     end
 
-    describe '.name_and_city' do
-      xit "returns name and city" do
-        expect(Shelter.name_and_city(@shelter_1.id)).to eq(@shelter_1.name)
+    describe '#name_and_city' do
+      it "returns name and city" do
+        expect(Shelter.name_and_city(@shelter_1.id)).to eq([@shelter_1])
       end
     end
   end

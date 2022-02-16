@@ -22,7 +22,8 @@ class Shelter < ApplicationRecord
   end
 
   def self.name_and_city(id)
-    find_by_sql("SELECT name, city FROM shelters WHERE id = #{id}")
+    #find_by_sql("SELECT name, city FROM shelters WHERE id = #{id}")
+    find_by_sql("SELECT * FROM shelters WHERE id = #{id}")
   end
 
   def self.find_pending_applications

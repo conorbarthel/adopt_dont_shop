@@ -53,4 +53,17 @@ RSpec.describe 'the admin shelters index' do
       expect(@shelter_1.name).to appear_before(@shelter_3.name)
     end
   end
+
+  it "Every shelter name is a link" do
+    visit "/admin/shelters"
+    within '#all_shelters' do
+      click_on "#{@shelter_2.name}"
+      expect(current_path).to eq("/admin/shelters/#{@shelter_2.id}")
+    end
+    visit "/admin/shelters"
+    within '#pending' do
+      click_on "#{@shelter_1.name}"
+      expect(current_path).to eq("/admin/shelters/#{@shelter_1.id}")
+    end
+  end
 end

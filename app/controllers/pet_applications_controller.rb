@@ -6,4 +6,9 @@ class PetApplicationsController < ApplicationController
     redirect_to "/applications/#{application.id}"
   end
 
+
+  private
+    def pet_application_params
+      params.with_defaults(status: "Pending")
+    end
 end

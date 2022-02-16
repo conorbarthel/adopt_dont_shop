@@ -7,6 +7,7 @@ RSpec.describe PetApplication, type: :model do
   end
 
   before(:each) do
+    PetApplication.destroy_all
     Pet.destroy_all
     Shelter.destroy_all
     Application.destroy_all
@@ -38,7 +39,7 @@ RSpec.describe PetApplication, type: :model do
                                               pet_id: @shelter_1.pets.last.id,
                                               status: "Approved")
   end
-  
+
   describe 'class methods' do
     describe "#find_pet_apps_with_id" do
       it "list pet applications that are pending" do

@@ -1,6 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe 'the shelter show' do
+  before(:each) do
+    PetApplication.destroy_all
+    Pet.destroy_all
+    Shelter.destroy_all
+    Application.destroy_all
+  end
+  
   it "shows the shelter and all it's attributes" do
     shelter = Shelter.create(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: false, rank: 9)
 

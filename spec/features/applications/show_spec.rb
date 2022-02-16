@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'Application show page' do
   before(:each) do
+    PetApplication.destroy_all
     Pet.destroy_all
     Shelter.destroy_all
     Application.destroy_all

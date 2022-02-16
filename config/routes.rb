@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   get '/', to: 'application#welcome'
 
   get '/admin/shelters', to: 'shelters#admin_index'
-  get '/admin/shelters/:id', to: 'shelter#admin_show'
+  get '/admin/shelters/:id', to: 'shelters#admin_show'
   get '/admin/applications/:id', to:'applications#admin_show'
 
   get '/applications/new', to: 'applications#new'

@@ -2,9 +2,10 @@ require 'rails_helper'
 
 RSpec.describe 'the admin applications show' do
   before(:each) do
-    # Pet.destroy_all
-    # Shelter.destroy_all
-    # Application.destroy_all
+    PetApplication.destroy_all
+    Pet.destroy_all
+    Shelter.destroy_all
+    Application.destroy_all
     @shelter_1 = Shelter.create(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: false, rank: 9)
     @shelter_2 = Shelter.create(name: 'RGV animal shelter', city: 'Harlingen, TX', foster_program: false, rank: 5)
     @shelter_3 = Shelter.create(name: 'Fancy pets of Colorado', city: 'Denver, CO', foster_program: true, rank: 10)
@@ -106,7 +107,7 @@ RSpec.describe 'the admin applications show' do
     click_on "Approve Mr. Pirate Application"
     click_on "Approve Clawdia Application"
     visit "/admin/applications/#{@application_2.id}"
-  
+
     expect(page).to have_content(@claw.name)
     expect(page).to_not have_content( "Approve Clawdia Application")
   end
